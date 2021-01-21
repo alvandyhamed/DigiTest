@@ -1,0 +1,62 @@
+{
+    "Wellcome":"Wellcom to my Filme Application",
+    "whatchinyourdevice":"Whatch moveis in you self handset",
+    "password":"Password",
+    "UserName":"UserName",
+    "Login":"Login",
+    "LoginError":"UserName or password was uncorrect ",
+    "NetworkProblem":"We have problem for connect to server",
+    "unexpectederror":"We have unxpected error please ",
+    "fillfildError":"Please fill all fields correctly",
+    "PleaseWait":"Please Wait!",
+    "Home":"HOME",
+    "MoviesCategory":"Movies Category",
+    "List":"List",
+  
+    "action":"action",
+
+    "adventure": "adventure",
+ "fantasy": "fantasy",
+"sci-fi":"sci-fi",
+"thriller": "thriller",
+ "documentary": "documentary",
+ "romance":"romance",
+"animation":"animation",
+ "comedy": "comedy",
+ "family":"family",
+"musical":"musical",
+"mystery":"mystery",
+ "western":"western",
+ "drama":"drama",
+ "history":"history",
+ "sport":"sport",
+"crime":"crime",
+"horror":"horror",
+ "war":"war",
+"biography":"biography",
+ "music":"music",
+ "game-show":"game-show",
+"reality-tv":"reality-tv",
+ "news":"news",
+ "short":"short",
+ "film-noir":"film-noir",
+"director":"director",
+ "actor":"actor",
+ "dance":"dance",
+ "pop":"pop",
+ "kiana":"kiana",
+ "happy":"happy",
+ "free":"free",
+ "genre":"genre",
+ "Find":"Find"
+
+
+
+
+
+
+
+
+
+
+}

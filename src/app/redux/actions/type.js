@@ -1,0 +1,5 @@
+
+export const COUNTER_CHANGE = 'COUNTER_CHANGE'
+export const TOKEN_SAVE="TOKEN_SAVE"
+export const CATEGORYSET="CATGORY_SET"
+export const MOVIES="MOVIES_SET"
