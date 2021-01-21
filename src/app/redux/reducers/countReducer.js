@@ -3,7 +3,7 @@ const initialState = {
 count: 0
 };
 const countReducer = (state = initialState, action) => {
-    console.log("JIVBIL",action.payload)
+    
 switch(action.type) {
 case COUNTER_CHANGE:
 return {

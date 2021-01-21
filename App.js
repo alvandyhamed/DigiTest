@@ -5,45 +5,35 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {Icon} from "native-base"
 import Login from "./src/app/components/Login/Login";
 import Home from "./src/app/components/Home/Home";
+import List from "./src/app/components/List/List";
+import Movies from "./src/app/components/Movies/Movies";
 import ReactNative from "react-native";
 import I18n,{getLanguages  } from "react-native-i18n";
 
-function Feed() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Feed!</Text>
-    </View>
-  );
-}
 
-function Profile() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
-
-function Notifications() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications!</Text>
-    </View>
-  );
-}
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
+      initialRouteName="Movies"
       tabBarOptions={{
         activeTintColor: '#e91e63',
       }}
     >
+        <Tab.Screen
+        name="Movies"
+        component={Movies}
+        options={{
+          tabBarLabel: 'Films',
+          tabBarIcon: ({ color, size }) => (
+            <Icon type="Ionicons" name="eye-outline" color={color} size={size}/>
+          ),
+        }}
+      />
       <Tab.Screen
-        name="Feed"
+        name="Home"
         component={Home}
         options={{
           tabBarLabel: 'Home',
@@ -53,11 +43,12 @@ function MyTabs() {
           ),
         }}
       />
+     
       <Tab.Screen
         name="Notifications"
-        component={Notifications}
+        component={List}
         options={{
-          tabBarLabel: 'Updates',
+          tabBarLabel: 'Category',
           tabBarIcon: ({ color, size }) => (
             <Icon type="Ionicons" name="eye-outline" color={color} size={size}/>
           ),

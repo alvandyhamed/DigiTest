@@ -74,7 +74,7 @@ export const LoginToApp=(that,UserName,Password)=>{
             that.setState({
                 loadingPermision:false
             })
-            console.log("HAMED",err)
+         
             ToastAndroid.show(I18n.t("unexpectederror"),ToastAndroid.SHORT)
             
         })

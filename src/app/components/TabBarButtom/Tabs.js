@@ -97,7 +97,7 @@ const Tab = createBottomTabNavigator();
                             style={{backgroundColor:Color.primaryLightColor}}
                             active={props.navigationState.index === 3}
                             onPress={() => {
-                                console.log("me page",props.navigationState.index)
+                               
                                 props.navigation.navigate("List")
                             }
                             }>

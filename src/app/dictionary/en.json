@@ -48,7 +48,14 @@
  "happy":"happy",
  "free":"free",
  "genre":"genre",
- "Find":"Find"
+ "Find":"Find",
+ "Lang":"Lang",
+ "Country":"Country",
+ "hindi":"Hindi",
+  "emglish":"English",
+  "IND":"IND",
+  "USA":"USA",
+  "AUS":"AUS"
 
 
 

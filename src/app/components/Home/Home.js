@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Item, Text, View,Input,Container,Content} from "native-base"
+import { Button, Item, Text, View,Input,Container,Content,Spinner} from "native-base"
 import { GetCatgory } from '../List/FuncGetCat'
 import { Getmovie } from "../Home/FuncGetMovie";
 import {CateGorySet}  from './../../redux/actions/Category';
@@ -13,32 +13,20 @@ import { SliderBox } from "react-native-image-slider-box";
 
 import {Icon,Picker} from "native-base"
 import Style from '../Home/Style';
+import Video from "../../containers/Video/Video";
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-];
-
-const renderItem = ({ item }) => (
-  <Item title={item.title} />
-);
 
 
  class Home extends React.Component{
   rendetsub({item}){
-    console.log(item)
-    return <Text>{item.title}</Text>
-  };
+    return <Video
+    item={item}
+    
+    />
+   
+  }; 
+  Lang=["hindi", "emglish"]
+   Country = ["IND", "USA", "AUS"]
     constructor(props){
         super(props)
         this.state={
@@ -50,8 +38,12 @@ const renderItem = ({ item }) => (
            
              
           ],
+         
          SelectedCategory:"documentary",
-         filter:""
+         filter:"",
+         country:"",
+         language:"",
+         loadinspiner:true
            
         }
         GetCatgory(this)
@@ -62,13 +54,15 @@ const renderItem = ({ item }) => (
    }
    onValueChange(SelectedCategory) {
     this.setState({
-      SelectedCategory
+      SelectedCategory,
+      loadinspiner:true
     });
     Getmovie(this,SelectedCategory,this.state.filter)
   }
   //This part for Flatlist index generator
   _keyExtractor=(item,index)=>index.key
     render(){
+     
      
     
         
@@ -113,6 +107,34 @@ const renderItem = ({ item }) => (
            
             </Picker>:null
     }
+    <Picker
+       placeholder="Select your SIM"
+       note
+       mode="dropdown"
+      
+       textStyle={{ color: "#5cb85c" }}
+       itemStyle={{
+         backgroundColor: "#d3d3d3",
+         marginLeft: 0,
+         paddingLeft: 10
+       }}
+       itemTextStyle={{ color: '#788ad2' }}
+       style={{ width: undefined }}
+       selectedValue={this.state.SelectedCategory}
+       onValueChange={this.onValueChange.bind(this)}
+    
+    >
+      {this.Lang.map((lan,key)=>{
+        return(<Picker.item
+        label={I18n.t(lan)}
+        value={lan}
+        key={key}
+        />
+          
+        )
+      })}
+
+    </Picker>
     
           
        
@@ -120,8 +142,9 @@ const renderItem = ({ item }) => (
     
             <Icon active type='Ionicons' name='search-outline'
             onPress={()=>{
-              //TODO ImplimentSerach
-              console.log("TAGSIR",this.state.filter)
+              this.setState({ loadinspiner:true})
+             
+           
               Getmovie(this,this.state.SelectedCategory,this.state.filter)
             }}
             />
@@ -136,7 +159,7 @@ const renderItem = ({ item }) => (
             style={Style.findStyle} placeholder={I18n.t('Find')}/>
           </Item>
          <SafeAreaView>
-           {console.log("Movies",this.props.Movies)}
+         { this.state.loadinspiner? <Spinner color='red' />:null}
          <FlatList
         data={this.props.Movies.Movies}
         renderItem={this.rendetsub.bind(this)}
@@ -147,8 +170,7 @@ const renderItem = ({ item }) => (
             <Button 
             onPress={()=>{
             
-              console.log("JITTT",this.props.Cats)
-              console.log("JITTT",this.props.Movies)
+           
             }}
            
             >
