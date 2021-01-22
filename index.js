@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import configureStore from './src/app/redux/store/configureStor';
 
 const store = configureStore()
+console.disableYellowBox = true;
 
 const RNRedux = () => (
   <Provider store = { store }>

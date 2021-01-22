@@ -7,6 +7,7 @@ import MoviesReducer from "../reducers/MoviesReducer";
 import _MoviesReducer from "../reducers/_MoviesReducer";
 import AllMoviesReducer from "../reducers/AllMoveisReducer";
 import VideosReducer from "../reducers/VideoReducer";
+import FilterReducer from "../reducers/FilterReducer";
 import logger from 'redux-logger'
 
 
@@ -18,7 +19,8 @@ const rootReducer = combineReducers(
     Movies:MoviesReducer,
     _Movies:_MoviesReducer,
     allmoveis:AllMoviesReducer,
-    Videos:VideosReducer
+    Videos:VideosReducer,
+    Filter:FilterReducer
 }
 
 

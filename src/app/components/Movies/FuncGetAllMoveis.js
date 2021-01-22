@@ -1,5 +1,6 @@
 
 import axios from "axios"
+import { ToastAndroid } from "react-native";
 import apis from "../../api/MyApi"
    export const GetAllMoveis=async (that,next,previous,nexts)=>{
      function getUrl(){
@@ -18,7 +19,7 @@ import apis from "../../api/MyApi"
         return previous
     }
     
-     console.log("HAMEDWALLKING",nexts,getUrl())
+    
     
     
    
@@ -30,13 +31,20 @@ import apis from "../../api/MyApi"
    
             const _next=res.data.next;
             const _previous=res.data.previous;
-            /// Set state for wallking
+            /// 9Set state for wallking
             that.setState({ refreshing: false,next:_next,prev:_previous,loadinspiner:false});
 
            /// Save to Redux 
             that.props.actions._MoviesSet(Movies)
         
           
+        }).catch(err=>{
+          
+
+            that.setState({ refreshing: false,loadinspiner:false});
+            ToastAndroid.show(I18n.t('Err'),ToastAndroid.SHORT)
+
+
         });
        
 

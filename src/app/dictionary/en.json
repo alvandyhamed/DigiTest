@@ -55,7 +55,13 @@
   "emglish":"English",
   "IND":"IND",
   "USA":"USA",
-  "AUS":"AUS"
+  "AUS":"AUS",
+
+  "SelectLang":"SelectLang",
+  "SelectContury":"SelectContury",
+  "FideASFilter":"FideASFilter",
+  "Err":"Error connection !",
+  "Logout":"Logout"
 
 
 

@@ -1,8 +1,9 @@
-import { View,Text, Fab, Container, Content, Icon, Button } from "native-base"
+import { View,Text, Fab, Container, Content, Icon, Button, Form } from "native-base"
 import I18n,{getLanguages  } from "react-native-i18n";
 import FA from "./../../dictionary/fa.json";
 import EN from "../../dictionary/en.json";
-import ReactNative,{Image,ScrollView } from "react-native";
+import ReactNative,{Image,ScrollView,AsyncStorage } from "react-native";
+
 import {FloatingLabelInput} from 'react-native-floating-label-input';
 
 import React from 'react'
@@ -15,6 +16,7 @@ import { connect } from 'react-redux';
 
  import {SaveToken}  from './../../redux/actions/Token';
 import { bindActionCreators } from 'redux';
+import WellcomePart from './Wellcompart'
 
 
 I18n.fallbacks=true
@@ -23,7 +25,48 @@ I18n.translations={
     'en-US':EN,
     'en':EN
 }
+
 class Login extends React.Component{
+    async resetKey() {
+        try {
+          await AsyncStorage.removeItem('Token');
+          await AsyncStorage.removeItem("USerName");
+          this.props.actions.SaveToken({Token:"",UserName:"",IsLogin:false})
+
+          
+         
+        } catch (error) {
+        
+        }
+      }
+     
+      async getKey() {
+            try {
+              const value = await AsyncStorage.getItem('Token');
+              const User=await AsyncStorage.getItem('username');
+              if (value !== null) {
+               
+               
+               this.props.actions.SaveToken({Token:value,UserName:User,IsLogin:true})
+                
+              }
+            } catch (error) {
+              // Error retrieving data
+            }
+          };
+          async storeData (UserName,TOken) {
+            try {
+                await AsyncStorage.setItem('username', UserName);
+
+              await AsyncStorage.setItem(
+               "Token",TOken
+              );
+            } catch (error) {
+              // Error saving data
+            }
+          };
+       
+      
     
     constructor(props){
         super(props)
@@ -31,7 +74,9 @@ class Login extends React.Component{
             password:'gt4043@1',
             username:'hriks',
             show:false,
-            loadingPermision:false
+            loadingPermision:false,
+          
+           
         }
           //This block (b.1) Part for convert to RTL and set lacale MyApllication
        //Start Block b.1
@@ -39,10 +84,14 @@ class Login extends React.Component{
        I18n.defaultLocale="fa"
        I18n.locale="fa"
        //End Block b.1
+       this.getKey()
+      
+
 
    }
   
     render(){
+        console.log("SHZAB",this.props)
      
 
         return(
@@ -53,8 +102,16 @@ loading={this.state.loadingPermision}
 ></Loader>
             
             <View>
-
-                <View style={Style.viewtitleStyle}>
+            {this.props.Token.IsLogin?
+            <WellcomePart
+            {...this.props}
+            
+           
+            
+            />
+            :
+               <View>
+               <View style={Style.viewtitleStyle}>
                     <Text style={Style.texttiltleStyle}>
                         {I18n.t('Wellcome')}
                     </Text>
@@ -126,13 +183,22 @@ loading={this.state.loadingPermision}
                 </View>
               
             </View>
+          
+    }
+      </View>
             </Content>
             </Container>
         )
 
     }
 }
-
+const mapStateToProps = state => (
+  
+    {   
+  
+     
+     Token:state.Token.Token,
+    });
 const ActionCreators = Object.assign(
     {},
     {SaveToken},
@@ -141,4 +207,4 @@ const ActionCreators = Object.assign(
     actions: bindActionCreators(ActionCreators, dispatch),
   });
   
-  export default connect(null, mapDispatchToProps)(Login)
+  export default connect(mapStateToProps, mapDispatchToProps)(Login)

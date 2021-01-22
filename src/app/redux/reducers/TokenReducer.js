@@ -7,7 +7,7 @@ switch(action.type) {
 case TOKEN_SAVE:
 return {
 ...state,
-count:action.Token
+Token:action.Token
 };
 default:
 return state;

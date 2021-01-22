@@ -11,7 +11,7 @@ import  {getDirectorName}  from "./../../utilities/GetSubstring";
 
 
 
-export default class Video extends Component {
+export default class MyPiker extends Component {
     constructor(props){
         super(props)
         this.state={

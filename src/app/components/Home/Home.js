@@ -4,6 +4,7 @@ import { GetCatgory } from '../List/FuncGetCat'
 import { Getmovie } from "../Home/FuncGetMovie";
 import {CateGorySet}  from './../../redux/actions/Category';
 import {MoviesSet}  from './../../redux/actions/Movies';
+import { FilterSet } from "./../../redux/actions/Filter";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,6 +16,7 @@ import {Icon,Picker} from "native-base"
 import Style from '../Home/Style';
 import Video from "../../containers/Video/Video";
 import  MyPiker  from "../../containers/MyPiker/MyPiker";
+import {RemoveDublicate} from '../../utilities/Filter'
 
 
 
@@ -28,6 +30,8 @@ import  MyPiker  from "../../containers/MyPiker/MyPiker";
   }; 
   Lang=[{name:"hindi",id:1}, {name:"emglish",id:2}]
    Country = [{name:"IND",id:1}, {name:"USA",id:2},{name :"AUS",id:3}]
+    FilterObj=[]
+   
     constructor(props){
         super(props)
         this.state={
@@ -48,39 +52,47 @@ import  MyPiker  from "../../containers/MyPiker/MyPiker";
            
         }
         GetCatgory(this)
-        Getmovie(this,this.state.SelectedCategory,this.state.filter)
+        Getmovie(this,"?tags="+this.state.SelectedCategory)
 
       
 
    }
    onValueChange(SelectedCategory) {
+   
+
     this.setState({
       SelectedCategory,
-      loadinspiner:true
+    
     });
-    Getmovie(this,SelectedCategory,this.state.filter)
+ 
+      this.FilterObj=RemoveDublicate("tags",SelectedCategory,this.FilterObj)
+      
+
+  
   }
   onValueChange_Lang(language){
    
     this.setState({
-      language,
-      loadinspiner:true,
-     
+      language
 
     })
+    this.FilterObj=RemoveDublicate("language",language,this.FilterObj)
     
-    Getmovie(this,this.state.SelectedCategory,this.state.filter+"&language="+language)
+    
+  
 
   }
   onValueChange_country(country){
     this.setState({
-      language,
-      loadinspiner:true,
+      country
+     
     
 
     })
     
-    Getmovie(this,this.state.SelectedCategory,this.state.filter+"&country="+country)
+    this.FilterObj=RemoveDublicate("country",country,this.FilterObj)
+
+ 
 
 
   }
@@ -128,7 +140,7 @@ import  MyPiker  from "../../containers/MyPiker/MyPiker";
     titr={I18n.t('SelectContury')}
     placeholder={I18n.t('SelectContury')}
     selectedValue={this.state.country}
-    onValueChange={this.onValueChange_Lang.bind(this)}
+    onValueChange={this.onValueChange_country.bind(this)}
     Date={this.Country}
    >
 
@@ -140,10 +152,12 @@ import  MyPiker  from "../../containers/MyPiker/MyPiker";
     
             <Icon active type='Ionicons' name='search-outline'
             onPress={()=>{
+              if(this.state.filter){
               this.setState({ loadinspiner:true})
              
            
-              Getmovie(this,this.state.SelectedCategory,this.state.filter)
+              Getmovie(this,"?search"+this.state.filter)
+              }
             }}
             />
             <Input
@@ -156,6 +170,33 @@ import  MyPiker  from "../../containers/MyPiker/MyPiker";
             value={this.state.filter}
             style={Style.findStyle} placeholder={I18n.t('Find')}/>
           </Item>
+          <View style={Style.buttonStyle}>
+      <Button full style={Style.findeButton} 
+     
+      onPress={()=>{
+        console.log(this.FilterObj)
+        var generatefilter=this.state.filter?"?search="+this.state.filter+"&":"?"
+       this.FilterObj.map((itemfilter,index)=>{
+        
+          generatefilter+=itemfilter.name+"="+itemfilter.value
+
+          if(this.FilterObj.length-1!=index){
+            generatefilter+='&'
+           
+          }
+        })
+        Getmovie(this,generatefilter)
+        console.log(generatefilter)
+      
+
+
+      }}
+
+      >
+          <Text style={Style.submittext}>{I18n.t("FideASFilter")}</Text>
+
+      </Button>
+      </View>
          <SafeAreaView>
          { this.state.loadinspiner? <Spinner color='red' />:null}
          <FlatList
@@ -183,7 +224,8 @@ const mapStateToProps = state => ({
 const ActionCreators = Object.assign(
     {},
     {CateGorySet},
-    {MoviesSet}
+    {MoviesSet},
+    {FilterSet}
   );
   const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(ActionCreators, dispatch),

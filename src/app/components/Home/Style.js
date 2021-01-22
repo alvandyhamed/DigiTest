@@ -16,5 +16,25 @@ stylegenre:{
 },
 findStyle:{
     fontFamily:Font.main,
+},
+buttonStyle:{
+    paddingTop:20,
+    paddingLeft:20,
+    paddingRight:20
+},
+findeButton:{
+    width:'100%',
+    borderRadius:25,
+    backgroundColor:Color.primarycolor,
+    alignSelf:'center',
+    padding:20,
+    flex:1,
+    elevation:2,
+    fontFamily:Font.main,
+    
+},
+submittext:{
+    fontFamily:Font.main,
+
 }
 }

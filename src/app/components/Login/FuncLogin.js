@@ -55,8 +55,8 @@ export const LoginToApp=(that,UserName,Password)=>{
                 })
              
                 if(resonsejson.status===200){
-                    that.props.actions.SaveToken(resonsejson.data.token)
-                    that.props.navigation.navigate('Home')
+                    that.props.actions.SaveToken({Token:resonsejson.data.token,UserName:UserName,IsLogin:true})
+                    that.storeData(UserName,resonsejson.data.token)
 
                 }else{
                     ToastAndroid.show(I18n.t("LoginError"),ToastAndroid.SHORT)

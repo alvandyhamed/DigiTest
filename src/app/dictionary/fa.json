@@ -57,6 +57,9 @@
      "AUS":"استرالیا",
 
      "SelectLang":"بر اساس زبان",
-     "SelectContury":"براساس کشور"
+     "SelectContury":"براساس کشور",
+     "FideASFilter":"جستجو بر اساس فیلتر",
+     "Err":"خطای دسترسی به شبکه ",
+     "Logout":"خروج"
 
 }
