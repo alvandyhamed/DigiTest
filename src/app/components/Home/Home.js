@@ -186,7 +186,7 @@ import {RemoveDublicate} from '../../utilities/Filter'
           }
         })
         Getmovie(this,generatefilter)
-        console.log(generatefilter)
+       
       
 
 

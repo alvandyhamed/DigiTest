@@ -1,10 +1,9 @@
 import React from 'react'
 import { Text,Spinner} from "native-base"
 import {GetAllMoveis} from "./FuncGetAllMoveis";
-import { AllMoviesSet } from "./../../redux/actions/AllMoveis";
 import { MoviesSet } from "./../../redux/actions/Movies";
 import { _MoviesSet } from "./../../redux/actions/_Movies";
-import { VideoSet } from "./../../redux/actions/Videos";
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FlatList, SafeAreaView,RefreshControl} from 'react-native';
@@ -99,7 +98,7 @@ const mapStateToProps = state => (
   });
 const ActionCreators = Object.assign(
     {},
-    {_MoviesSet},{MoviesSet},{VideoSet},{AllMoviesSet}
+    {_MoviesSet},{MoviesSet}
   );
   const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(ActionCreators, dispatch),

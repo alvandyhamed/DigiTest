@@ -7,7 +7,7 @@ import apis from "../../api/MyApi"
  * 
  */
 export const Getmovie=async (that,filter)=>{
-  console.log("Mylink",apis.getMovies+filter)
+ 
   
   
   const res = await axios.get(apis.getMovies+filter).then(res=>{

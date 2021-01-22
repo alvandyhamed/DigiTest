@@ -24,7 +24,7 @@ class List extends React.Component{
    }
   
     render(){
-        console.log("CHCHICHI",this.props)
+       
         return (
             <Container>
                 <Content>

@@ -9,7 +9,10 @@ import configureStore from './src/app/redux/store/configureStor';
 
 const store = configureStore()
 console.disableYellowBox = true;
-
+/// Disable consol.log in production version
+if(!__DEV__){
+console.log=()=>{}
+}
 const RNRedux = () => (
   <Provider store = { store }>
     

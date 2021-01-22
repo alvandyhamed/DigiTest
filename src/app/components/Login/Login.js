@@ -166,7 +166,7 @@ loading={this.state.loadingPermision}
 
      <View style={Style.buttonStyle}>
       <Button full style={Style.submitButton} 
-      //TODO impliment Login
+     
       onPress={()=>{
         LoginToApp(this,this.state.username,this.state.password)
 
