@@ -14,6 +14,7 @@ import { SliderBox } from "react-native-image-slider-box";
 import {Icon,Picker} from "native-base"
 import Style from '../Home/Style';
 import Video from "../../containers/Video/Video";
+import  MyPiker  from "../../containers/MyPiker/MyPiker";
 
 
 
@@ -25,8 +26,8 @@ import Video from "../../containers/Video/Video";
     />
    
   }; 
-  Lang=["hindi", "emglish"]
-   Country = ["IND", "USA", "AUS"]
+  Lang=[{name:"hindi",id:1}, {name:"emglish",id:2}]
+   Country = [{name:"IND",id:1}, {name:"USA",id:2},{name :"AUS",id:3}]
     constructor(props){
         super(props)
         this.state={
@@ -59,6 +60,31 @@ import Video from "../../containers/Video/Video";
     });
     Getmovie(this,SelectedCategory,this.state.filter)
   }
+  onValueChange_Lang(language){
+   
+    this.setState({
+      language,
+      loadinspiner:true,
+     
+
+    })
+    
+    Getmovie(this,this.state.SelectedCategory,this.state.filter+"&language="+language)
+
+  }
+  onValueChange_country(country){
+    this.setState({
+      language,
+      loadinspiner:true,
+    
+
+    })
+    
+    Getmovie(this,this.state.SelectedCategory,this.state.filter+"&country="+country)
+
+
+  }
+
   //This part for Flatlist index generator
   _keyExtractor=(item,index)=>index.key
     render(){
@@ -78,63 +104,35 @@ import Video from "../../containers/Video/Video";
             >
             </SliderBox>
           
-           <Text style={Style.stylegenre}>{I18n.t("genre")}</Text>
-            { this.props.Cats.Cats? <Picker
-                placeholder="Select your SIM"
-              note
-              mode="dropdown"
-             
-              textStyle={{ color: "#5cb85c" }}
-              itemStyle={{
-                backgroundColor: "#d3d3d3",
-                marginLeft: 0,
-                paddingLeft: 10
-              }}
-              itemTextStyle={{ color: '#788ad2' }}
-              style={{ width: undefined }}
+    { this.props.Cats.Cats? <MyPiker
+                placeholder={I18n.t('genre')}
+                titr={I18n.t('genre')}
+              
               selectedValue={this.state.SelectedCategory}
               onValueChange={this.onValueChange.bind(this)}
+              Date={this.props.Cats.Cats}
             >
            
-              {this.props.Cats.Cats.map((item,key)=>{
-                return(<Picker.item
-                  label={I18n.t(item.name)}
-                  value={item.name}
-                  key={item.id}
-                />)
-               
-              })}
            
-            </Picker>:null
+            </MyPiker>:null
     }
-    <Picker
-       placeholder="Select your SIM"
-       note
-       mode="dropdown"
-      
-       textStyle={{ color: "#5cb85c" }}
-       itemStyle={{
-         backgroundColor: "#d3d3d3",
-         marginLeft: 0,
-         paddingLeft: 10
-       }}
-       itemTextStyle={{ color: '#788ad2' }}
-       style={{ width: undefined }}
-       selectedValue={this.state.SelectedCategory}
-       onValueChange={this.onValueChange.bind(this)}
-    
-    >
-      {this.Lang.map((lan,key)=>{
-        return(<Picker.item
-        label={I18n.t(lan)}
-        value={lan}
-        key={key}
-        />
-          
-        )
-      })}
+    <MyPiker
+    titr={I18n.t('SelectLang')}
+    placeholder={I18n.t('SelectLang')}
+    selectedValue={this.state.language}
+    onValueChange={this.onValueChange_Lang.bind(this)}
+    Date={this.Lang}
 
-    </Picker>
+    ></MyPiker>
+   <MyPiker
+    titr={I18n.t('SelectContury')}
+    placeholder={I18n.t('SelectContury')}
+    selectedValue={this.state.country}
+    onValueChange={this.onValueChange_Lang.bind(this)}
+    Date={this.Country}
+   >
+
+   </MyPiker>
     
           
        
@@ -166,16 +164,7 @@ import Video from "../../containers/Video/Video";
         keyExtractor={item => item.id}
       />
           </SafeAreaView>
-          <Text>TEst</Text>
-            <Button 
-            onPress={()=>{
-            
-           
-            }}
-           
-            >
-               <Text>Click Me!</Text>
-            </Button>
+          
             </View>
             </Content>
             </Container>

@@ -1,4 +1,4 @@
-import { View } from "native-base"
+import { View ,Picker} from "native-base"
 import React,{ Component } from "react"
 import { TouchableOpacity ,Text,Image} from "react-native"
 import Style from "./Style"
@@ -19,8 +19,10 @@ export default class Video extends Component {
         }
     }
     render(){
+        console.log("LLL",this.props.Date)
         return (
-           <View>
+           <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                 <Text style={Style.styleTitr}>{this.props.titr}</Text>
                <Picker
                 placeholder={this.props.placeholder}
                 note
@@ -30,8 +32,8 @@ export default class Video extends Component {
               itemStyle={Style.itemStyle}
               itemTextStyle={Style.itemTextStyle}
               style={{ width: undefined }}
-              selectedValue={this.props.selected}
-              onValueChange={this.onValueChange.bind(this)}
+              selectedValue={this.props.selectedValue}
+              onValueChange={this.props.onValueChange}
             >
            
               {this.props.Date.map((item,key)=>{

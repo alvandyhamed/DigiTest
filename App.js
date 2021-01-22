@@ -17,21 +17,12 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Movies"
+      initialRouteName="Home"
       tabBarOptions={{
         activeTintColor: '#e91e63',
       }}
     >
-        <Tab.Screen
-        name="Movies"
-        component={Movies}
-        options={{
-          tabBarLabel: 'Films',
-          tabBarIcon: ({ color, size }) => (
-            <Icon type="Ionicons" name="eye-outline" color={color} size={size}/>
-          ),
-        }}
-      />
+      
       <Tab.Screen
         name="Home"
         component={Home}
@@ -39,18 +30,27 @@ function MyTabs() {
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
            
-            <Icon type="Ionicons" name="eye-outline" color={color} size={size}/>
+            <Icon type="Ionicons" name="home-outline" color={color} size={size}/>
           ),
         }}
       />
-     
+       <Tab.Screen
+        name="Movies"
+        component={Movies}
+        options={{
+          tabBarLabel: 'Films',
+          tabBarIcon: ({ color, size }) => (
+            <Icon type="Ionicons" name="film-outline" color={color} size={size}/>
+          ),
+        }}
+      />
       <Tab.Screen
-        name="Notifications"
+        name="Category"
         component={List}
         options={{
           tabBarLabel: 'Category',
           tabBarIcon: ({ color, size }) => (
-            <Icon type="Ionicons" name="eye-outline" color={color} size={size}/>
+            <Icon type="Ionicons" name="grid-outline" color={color} size={size}/>
           ),
         }}
       />
@@ -60,7 +60,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <Icon type="Ionicons" name="eye-outline" color={color} size={size}/>
+            <Icon type="Ionicons" name="person-outline" color={color} size={size}/>
           ),
         }}
       />

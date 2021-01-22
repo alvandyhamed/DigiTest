@@ -29,14 +29,7 @@ class Movies extends React.Component{
       
    }
    onEndReachedCalledDuringMomentum = true
-   componentDidMount() {
-     /// 0 means the first 50
-     /// 1 means the next 
-     /// -1 means the priviuse
-
-   // GetAllMoveis(this,"","",0)
-   
-  }
+  
   rendetsub({item}){
     return <Video
     item={item}
@@ -100,9 +93,7 @@ class Movies extends React.Component{
 const mapStateToProps = state => (
   
   {   
-  Video:state.Video,
-   Next:state.Next,
-   Prev:state.Prev,
+
    
    _Movies:state._Movies,
   });
